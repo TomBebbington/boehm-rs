@@ -1,5 +1,5 @@
 #![allow(dead_code)]
-#![allow(non_snake_case_functions)]
+#![allow(non_snake_case)]
 
 //! Precise GC on the heap.
 //!

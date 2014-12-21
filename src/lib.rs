@@ -62,8 +62,10 @@ impl<T: 'static> Gc<T> {
             Gc { ptr: p, mark: marker::NoSend }
         }
     }
+}
 
-    pub fn borrow<'r>(&'r self) -> &'r T {
+impl<T: 'static> Deref<T> for Gc<T> {
+    fn deref<'a>(&'a self) -> &'a T {
         unsafe {
             &*self.ptr
         }

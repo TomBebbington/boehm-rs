@@ -87,7 +87,7 @@ impl<T: BoehmTraced> GcTracing<T> {
             } as *mut T;
 
             if p.is_null() {
-                fail!("Could not allocate")
+                panic!("Could not allocate")
             }
             intrinsics::move_val_init(&mut *p, value);
             GcTracing {
@@ -124,11 +124,11 @@ pub trait BoehmTraced {
 
         if num_words < 16 {
             let mut vec = [false, .. 16];
-            BoehmTraced::indicate_ptr_words(dummy, vec);
+            BoehmTraced::indicate_ptr_words(dummy, vec[mut]);
             make_descriptor(vec.slice_to(num_words))
         } else {
             let mut vec = Vec::from_elem(num_words, false);
-            BoehmTraced::indicate_ptr_words(dummy, vec.as_mut_slice());
+            BoehmTraced::indicate_ptr_words(dummy, vec[mut]);
             make_descriptor(vec.as_slice())
         }
     }

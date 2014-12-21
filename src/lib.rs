@@ -1,5 +1,5 @@
 #![crate_type="rlib"]
-#![feature(globs, macro_rules)]
+#![feature(globs, macro_rules, slicing_syntax)]
 
 extern crate libc;
 use std::mem;
@@ -56,7 +56,7 @@ impl<T: 'static> Gc<T> {
                 ffi::GC_malloc(size)
             } as *mut T;
             if p.is_null() {
-                fail!("Could not allocate")
+                panic!("Could not allocate")
             }
             intrinsics::move_val_init(&mut *p, value);
             Gc { ptr: p, mark: marker::NoSend }

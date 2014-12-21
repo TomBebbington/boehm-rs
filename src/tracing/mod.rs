@@ -97,12 +97,10 @@ impl<T: BoehmTraced> GcTracing<T> {
             }
         }
     }
-
-    #[inline]
-    pub fn borrow<'r>(&'r self) -> &'r T {
-        unsafe {
-            &*self.ptr
-        }
+}
+impl<T: BoehmTraced> Deref<T> for GcTracing<T> {
+    fn deref(&self) -> &T {
+        unsafe { &*self.ptr }
     }
 }
 

@@ -65,9 +65,7 @@ impl<T: 'static> Gc<T> {
 }
 
 impl<T: 'static> Deref<T> for Gc<T> {
-    fn deref<'a>(&'a self) -> &'a T {
-        unsafe {
-            &*self.ptr
-        }
+    fn deref(&self) -> &T {
+        unsafe { &*self.ptr }
     }
 }

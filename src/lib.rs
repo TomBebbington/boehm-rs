@@ -39,12 +39,12 @@ pub fn debug_dump() {
 }
 
 /// A garbage collected pointer.
-#[deriving(Clone)]
 #[allow(raw_pointer_deriving)]
 pub struct Gc<T> {
     ptr: *mut T,
     mark: marker::NoSend
 }
+impl<T> Copy for Gc<T> {}
 
 impl<T: 'static> Gc<T> {
     pub fn new(value: T) -> Gc<T> {

@@ -39,7 +39,7 @@ pub fn debug_dump() {
 }
 
 /// A garbage collected pointer.
-#[deriving(Copy)]
+#[deriving(Clone)]
 #[allow(raw_pointer_deriving)]
 pub struct Gc<T> {
     ptr: *mut T,
